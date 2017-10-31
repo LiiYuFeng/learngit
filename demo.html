@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myapp">
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<script type="text/javascript" src="jquery-2.1.0.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
 </head>
-<body>
-	dsaf 
+<style type="text/css">
+	ul li{
+		list-style-type: none;
+	}
+</style>
+<body ng-controller="mycontroller">
+	<div class="module">
+		<ul>
+			<li ng-repeat="i in names">
+				<span>姓名：{{i.Name}}<span>
+				<span>路径：{{i.Url}}</span>
+				<span>国家：{{i.Country}}</span>
+			</li>
+		</ul>
+	</div>
 </body>
+<script type="text/javascript">
+	var app=angular.module("myapp",[]);
+	app.controller('mycontroller',function($scope,$http){
+		$http.get('json.json').then(function(response){
+			$scope.names=response.data.sites;
+		})
+	})
+</script>
 </html>
